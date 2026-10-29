@@ -845,7 +845,7 @@ func (h *Handler) handleHello(cmd *shared.Command, w *shared.Writer, conn *share
 	w.WriteBulkStringStr("swytch")
 
 	w.WriteBulkStringStr("version")
-	w.WriteBulkStringStr("8.4.0")
+	w.WriteBulkStringStr(redisCompatVersion)
 
 	w.WriteBulkStringStr("proto")
 	w.WriteInteger(int64(conn.Protocol))
