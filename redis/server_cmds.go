@@ -40,6 +40,11 @@ const (
 	clientSubcommandList = "LIST"
 )
 
+// redisCompatVersion is the Redis release Swytch is compatible with, reported
+// as redis_version in INFO and as version in HELLO. Swytch's own release is
+// Version.
+const redisCompatVersion = "8.4.0"
+
 func (h *Handler) handleInfo(cmd *shared.Command, w *shared.Writer) {
 	// Build info string
 	info := h.buildInfoString(cmd.Args)
@@ -58,7 +63,9 @@ func (h *Handler) buildInfoString(args [][]byte) string {
 	// Server section
 	if section == "" || section == "SERVER" || section == infoSectionAll {
 		info.WriteString("# Server\r\n")
-		info.WriteString("redis_version:8.4.0-swytch\r\n")
+		fmt.Fprintf(&info, "redis_version:%s\r\n", redisCompatVersion)
+		info.WriteString("server_name:swytch\r\n")
+		fmt.Fprintf(&info, "swytch_version:%s\r\n", Version)
 		info.WriteString("redis_git_sha1:00000000\r\n")
 		info.WriteString("redis_git_dirty:0\r\n")
 		info.WriteString("redis_build_id:swytch\r\n")
