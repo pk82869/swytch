@@ -12,7 +12,7 @@ on:
       - "flake.lock"
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   update-vendor-hash:
@@ -49,7 +49,7 @@ jobs:
       - name: Commit updated hash
         env:
           PR_BRANCH: ${{ github.head_ref }}
-          token: ${{ secrets.NIX_UPDATE_TOKEN }}
+          NIX_UPDATE_TOKEN: ${{ secrets.NIX_UPDATE_TOKEN }}
 
         run: |
           if git diff --quiet -- flake.nix; then
