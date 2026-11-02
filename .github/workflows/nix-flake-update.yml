@@ -8,8 +8,8 @@ on:
 
 jobs:
   build:
-    permissions:
-      contents: read
+    #permissions:
+    #  contents: read
     runs-on: ubuntu-latest
 
     steps:
