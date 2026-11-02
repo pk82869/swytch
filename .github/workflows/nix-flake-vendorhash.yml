@@ -11,8 +11,8 @@ on:
       - "flake.nix"
       - "flake.lock"
 
-permissions:
-  contents: read
+#permissions:
+#  contents: read
 
 jobs:
   update-vendor-hash:
